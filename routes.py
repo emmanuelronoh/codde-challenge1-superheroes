@@ -10,7 +10,7 @@ class HeroPowerSchema(Schema):
     hero_id = fields.Integer(required=True)
     power_id = fields.Integer(required=True)
 
-    # Custom validation for strength
+
     @validates('strength')
     def validate_strength(self, value):
         if value not in ['Strong', 'Weak', 'Average']:
@@ -49,7 +49,6 @@ def create_hero_power():
     """Create a new HeroPower association."""
     data = request.get_json()
 
-    # Validate incoming data
     schema = HeroPowerSchema()
     try:
         schema.load(data)

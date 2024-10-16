@@ -4,9 +4,9 @@ from models import db, Hero, Power, HeroPower
 def clear_db():
     """Clear the database of all data."""
     print("Clearing db...")
-    HeroPower.query.delete()  # Clear hero_powers first
-    Power.query.delete()       # Then clear powers
-    Hero.query.delete()        # Finally clear heroes
+    HeroPower.query.delete()  
+    Power.query.delete()       
+    Hero.query.delete()        
     db.session.commit()
     print("Database cleared!")
 
@@ -48,7 +48,7 @@ def add_powers_to_heroes(heroes, powers):
     strengths = ["Strong", "Weak", "Average"]
     hero_powers = []
     for hero in heroes:
-        power = rc(powers)  # Randomly select a power
+        power = rc(powers)  
         hero_power = HeroPower(hero=hero, power=power, strength=rc(strengths))
         hero_powers.append(hero_power)
     db.session.add_all(hero_powers)
@@ -61,12 +61,12 @@ def run_seeding():
         clear_db()
         seed_powers()
         seed_heroes()
-        heroes = Hero.query.all()  # Get all seeded heroes
-        powers = Power.query.all()  # Get all seeded powers
+        heroes = Hero.query.all()  
+        powers = Power.query.all()  
         add_powers_to_heroes(heroes, powers)
         print("Done seeding!")
 
 if __name__ == '__main__':
-    from app import app  # Import app only here to avoid circular import issues
+    from app import app  
     with app.app_context():
         run_seeding()
